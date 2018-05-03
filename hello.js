@@ -1,11 +1,14 @@
-var http=require("http");
+var http=require("http"),
+    fs = require("fs");
 
 
-var manejador = function (solicitud, respuesta){
-    console.log("recibimos peticion");
-    respuesta.end("hola mundo");
-};
 
-var servidor=http.createServer(manejador);
 
-servidor.listen(3000);
+http.createServer(function(req,res){
+    fs.readFile("./index.html",function(err,html){
+        res.write(html);
+        res.end();
+    });
+}).listen(3000);
+
+
